@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Radio Kashmir</title>
+<style>
+:root{
+  --bg:#eef1ef;--panel:#ffffff;--line:#d3dcd8;--fg:#16262a;--muted:#5a6d70;
+  --lake:#1f6b6a;--lake-soft:#dcebe8;--chinar:#b8481f;--on-accent:#ffffff;
+  --display:"Alegreya",Georgia,serif;
+  --body:"Hanken Grotesk",-apple-system,system-ui,sans-serif;
+  --urdu:"Noto Nastaliq Urdu","Geeza Pro",serif;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#0e1a1c;--panel:#152427;--line:#253a3e;--fg:#e6eeec;--muted:#93a7a8;
+  --lake:#5fb3ad;--lake-soft:#173335;--chinar:#e8784b;--on-accent:#0e1a1c;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--body);
+  padding-top:max(18px,env(safe-area-inset-top,0px));
+  padding-bottom:max(48px,env(safe-area-inset-bottom,0px));
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+[hidden]{display:none!important}
+.wrap{max-width:540px;margin:0 auto;display:grid;gap:20px}
+header{display:grid;gap:4px}
+.urdu{font-family:var(--urdu);color:var(--chinar);font-size:20px;line-height:1.9;direction:rtl;text-align:right}
+h1{font:700 40px/1 var(--display);margin:0}
+.sub{color:var(--muted);margin:4px 0 0}
+.band{margin-top:12px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:8px 0;
+  display:flex;justify-content:space-between;font:500 12px var(--body);letter-spacing:.06em;color:var(--muted);font-variant-numeric:tabular-nums}
+.band b{color:var(--lake);font-weight:600}
+h2{font:600 12px var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:6px 0 -8px}
+.list{display:grid;gap:10px}
+.st{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:12px}
+.st.last{border-color:var(--chinar)}
+.top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.top>div{min-width:0}
+.name{font:700 21px/1.2 var(--display)}
+.lang{color:var(--muted);font-size:14px}
+.badge{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--chinar);font-weight:600}
+.icon{background:none;border:0;font-size:22px;line-height:1;color:var(--line);cursor:pointer;padding:2px 4px}
+.icon[aria-pressed="true"]{color:var(--chinar)}
+.icon.del{font-size:15px;color:var(--muted)}
+.row{display:flex;gap:8px}
+a.play{flex:1;display:flex;align-items:center;justify-content:center;gap:10px;background:var(--lake);color:var(--on-accent);
+  text-decoration:none;font-weight:600;border-radius:11px;padding:14px;font-size:17px}
+a.play:active{opacity:.85}
+.tri{width:0;height:0;border-left:12px solid currentColor;border-top:8px solid transparent;border-bottom:8px solid transparent}
+.more{display:flex;align-items:center;justify-content:center;border:1px solid var(--line);color:var(--fg);background:transparent;
+  border-radius:11px;padding:0 14px;font:500 14px var(--body);text-decoration:none;cursor:pointer}
+.alt{flex:1;padding:12px}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--chinar);outline-offset:2px}
+.note{color:var(--muted);font-size:14px;margin:0}
+/* add-your-own form */
+form{background:var(--panel);border:1px dashed var(--line);border-radius:14px;padding:14px;display:grid;gap:10px}
+label{font-size:14px;color:var(--muted);display:grid;gap:4px}
+input{font:16px var(--body);padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--fg);width:100%}
+button.primary{background:var(--lake);color:var(--on-accent);border:0;border-radius:11px;padding:12px;font:600 16px var(--body);cursor:pointer}
+/* FM guide */
+.fm{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.fm div{display:flex;justify-content:space-between;gap:12px;padding:11px 14px;border-top:1px solid var(--line)}
+.fm div:first-child{border-top:0}
+.fm span:first-child{min-width:0}
+.fm small{display:block;color:var(--muted);font-size:13px}
+.fm b{color:var(--lake);font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--panel);border-top:1px solid var(--line);
+  padding:12px 16px;display:flex;align-items:center;gap:12px}
+.bar .t{flex:1;min-width:0}
+.bar .t b{display:block;font:700 18px/1.2 var(--display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .t span{color:var(--muted);font-size:13px}
+.bar button{border:0;border-radius:50%;width:48px;height:48px;font-size:18px;cursor:pointer}
+.bar .pp{background:var(--lake);color:var(--on-accent)}
+.bar .x{background:transparent;color:var(--muted);border:1px solid var(--line)}
+body.has-bar{padding-bottom:110px}
+.st.on{border-color:var(--lake);box-shadow:0 0 0 1px var(--lake)}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);
+  background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:20px;font-size:14px;max-width:90vw;word-break:break-all}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="urdu">ریڈیو کشمیر</div>
+    <h1>Radio Kashmir</h1>
+    <p class="sub">Radio from the Kashmir Valley only.</p>
+    <div class="band" aria-label="Radio Kashmir Srinagar frequencies"><span>MW <b>1116</b> kHz</span><span>FM <b>102.6</b></span><span>FM <b>103.5</b> MHz</span></div>
+  </header>
+
+  <h2 id="favHead" hidden>Saved</h2>
+  <div class="list" id="favs"></div>
+
+  <h2>Live online</h2>
+  <div class="list" id="live"></div>
+  <p class="note">Tap <b>Listen</b>. It keeps playing with the screen off; control it from the notification or lock screen.</p>
+
+  <h2>Your stations</h2>
+  <div class="list" id="mine"></div>
+  <form id="addForm">
+    <p class="note" style="color:var(--fg)">Found another Kashmir stream? Add it here and it stays in the app.</p>
+    <label>Station name<input id="addName" required placeholder="e.g. Radio Chinar"></label>
+    <label>Stream link<input id="addUrl" required type="url" inputmode="url" placeholder="https://…"></label>
+    <button class="primary" type="submit">Add station</button>
+  </form>
+
+  <h2>On FM in the Valley</h2>
+  <p class="note" style="margin-top:4px">These stations broadcast from the Valley but have no public internet stream. Tune them on a radio set.</p>
+  <div class="fm">
+    <div><span>Akashvani Srinagar<small>Kashmiri · Urdu</small></span><b>MW 1116</b></div>
+    <div><span>Akashvani Srinagar FM<small>Rainbow & local shows</small></span><b>102.6 · 103.5</b></div>
+    <div><span>Akashvani Uri<small>Kashmiri · Pahari · Gojri</small></span><b>100.1</b></div>
+    <div><span>Radio Baramulla<small>Kanth Bagh, Baramulla</small></span><b>89.6</b></div>
+    <div><span>Radio Uri<small>Pahadon ki Dhun</small></span><b>90.0</b></div>
+    <div><span>Radio Chinar<small>Sopore · Bandipora · Baramulla</small></span><b>90.4</b></div>
+    <div><span>Radio Kupwara<small>Kupwara</small></span><b>89.6</b></div>
+    <div><span>Shina Gilgit Radio<small>Gurez ki Dhadkan</small></span><b>88.8</b></div>
+    <div><span>Radio Kangan<small>Wussan, Ganderbal</small></span><b>88.4</b></div>
+    <div><span>Radio Raabta<small>Anantnag · Pulwama · Kulgam</small></span><b>90.8</b></div>
+    <div><span>Paigam-e-Shopian<small>Shopian</small></span><b>89.6</b></div>
+  </div>
+  <p class="note">Streams from Prasar Bharati. Updated 19 Nov 2026.</p>
+</div>
+<div class="bar" id="bar" hidden>
+  <div class="t"><b id="barName"></b><span id="barState"></span></div>
+  <button class="pp" id="barPP" type="button" aria-label="Pause">❚❚</button>
+  <button class="x" id="barX" type="button" aria-label="Stop">■</button>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const LIVE=[
+ {id:"srinagar",n:"Radio Kashmir Srinagar",l:"Akashvani Srinagar · Kashmiri · Urdu",u:"https://radio.wavespb.com/live/01e2be674a0543a6/01e2be674a0543a6.m3u8"}
+];
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let favs=new Set(store.get("wadi-favs",[])), last=store.get("wadi-last",null), mine=store.get("wadi-mine",[]);
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function toast(t){const el=$("toast");el.textContent=t;el.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>el.hidden=true,2600)}
+
+function card(s,own){
+  const d=document.createElement("div");d.className="st"+(last===s.id?" last":"");
+  const u=esc(s.u);
+  d.innerHTML=`<div class="top"><div>${last===s.id?'<div class="badge">Last played</div>':''}<div class="name">${esc(s.n)}</div><div class="lang">${esc(s.l||"Added by you")}</div></div>
+    <div>${own?'<button class="icon del" type="button" aria-label="Remove '+esc(s.n)+'">✕</button>':''}<button class="icon fav" type="button" aria-pressed="${favs.has(s.id)}" aria-label="Save ${esc(s.n)}">★</button></div></div>
+    <div class="row"><a class="play" href="${u}" target="_blank" rel="noopener" data-play><span class="tri" aria-hidden="true"></span><span data-lbl>Listen</span></a>
+    <button class="more" type="button" aria-expanded="false" aria-label="More ways to play">⋯</button></div>
+    <div class="row" hidden><button class="more alt" type="button" data-copy>Copy stream link</button></div>`;
+  d.dataset.id=s.u;
+  d.querySelector("[data-play]").addEventListener("click",e=>{
+    store.set("wadi-last",s.id);
+    if(window.Wadi){e.preventDefault();
+      if(now.id===s.u&&now.state!=="stopped"&&now.state!=="error"){Wadi.toggle();return}
+      Wadi.play(s.u,s.n,s.l||"Radio Kashmir");onNative({state:"buffering",id:s.u,title:s.n,msg:""})}
+  });
+  d.querySelector(".fav").addEventListener("click",()=>{favs.has(s.id)?favs.delete(s.id):favs.add(s.id);store.set("wadi-favs",[...favs]);render();toast(favs.has(s.id)?"Saved":"Removed from Saved")});
+  const del=d.querySelector(".del");
+  if(del) del.addEventListener("click",()=>{mine=mine.filter(m=>m.id!==s.id);favs.delete(s.id);store.set("wadi-mine",mine);store.set("wadi-favs",[...favs]);render();toast("Removed")});
+  const moreBtn=d.querySelector("button.more:not([data-copy])"), extra=d.querySelectorAll(".row")[1];
+  moreBtn.addEventListener("click",()=>{extra.hidden=!extra.hidden;moreBtn.setAttribute("aria-expanded",String(!extra.hidden))});
+  d.querySelector("[data-copy]").addEventListener("click",()=>{
+    if(window.Wadi){Wadi.copy(s.u);toast("Link copied");return}
+    try{navigator.clipboard.writeText(s.u).then(()=>toast("Link copied")).catch(()=>toast(s.u))}catch(e){toast(s.u)}
+  });
+  return d;
+}
+function render(){
+  ["favs","live","mine"].forEach(g=>$(g).innerHTML="");
+  LIVE.forEach(s=>{$("live").appendChild(card(s,false)); if(favs.has(s.id)) $("favs").appendChild(card(s,false));});
+  mine.forEach(s=>{$("mine").appendChild(card(s,true)); if(favs.has(s.id)) $("favs").appendChild(card(s,true));});
+  $("favHead").hidden=$("favs").children.length===0;
+  if(typeof now!=="undefined")onNative(now);
+}
+$("addForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const n=$("addName").value.trim(), u=$("addUrl").value.trim();
+  if(!n||!/^https?:\/\//i.test(u)){toast("Enter a name and a link starting with https://");return}
+  mine.push({id:"m"+Date.now(),n,u,l:"Added by you"});store.set("wadi-mine",mine);
+  $("addName").value="";$("addUrl").value="";render();toast("Added "+n);
+});
+let now={state:"stopped",id:"",title:""};
+const LABEL={playing:"Playing",buffering:"Connecting…",paused:"Paused",error:"Not answering",stopped:""};
+window.onNative=function(st){
+  now=st;
+  const active=st.state!=="stopped";
+  $("bar").hidden=!active;document.body.classList.toggle("has-bar",active);
+  $("barName").textContent=st.title||"";
+  $("barState").textContent=st.state==="error"?(st.msg||LABEL.error):LABEL[st.state]||"";
+  $("barPP").textContent=st.state==="playing"||st.state==="buffering"?"❚❚":"▶";
+  $("barPP").setAttribute("aria-label",st.state==="playing"?"Pause":"Play");
+  document.querySelectorAll(".st").forEach(c=>{
+    const on=active&&c.dataset.id===st.id;c.classList.toggle("on",on);
+    const tri=c.querySelector(".tri");if(tri)tri.style.display=on&&st.state==="playing"?"none":"";
+    const l=c.querySelector("[data-lbl]");if(l)l.textContent=on?(st.state==="playing"?"Pause":st.state==="buffering"?"Connecting…":"Listen"):"Listen";
+  });
+};
+$("barPP").addEventListener("click",()=>{if(window.Wadi)Wadi.toggle()});
+$("barX").addEventListener("click",()=>{if(window.Wadi)Wadi.stop()});
+render();
+</script>
+</body>
+</html>

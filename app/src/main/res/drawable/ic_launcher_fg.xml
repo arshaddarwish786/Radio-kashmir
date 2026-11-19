@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Mountains over the lake, with radio waves rising from a mast -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <path android:fillColor="#DCEBE8" android:pathData="M30,70 L46,48 L54,58 L64,44 L80,70 Z"/>
+    <path android:fillColor="#E8784B" android:pathData="M53,40 L55,40 L55,58 L53,58 Z"/>
+    <path android:fillColor="#E8784B" android:pathData="M54,37 m-3,0 a3,3 0,1 1,6 0 a3,3 0,1 1,-6 0"/>
+    <path android:strokeColor="#E8784B" android:strokeWidth="2.5" android:strokeLineCap="round" android:fillColor="#00000000"
+        android:pathData="M47,31 A10,10 0,0 1,61 31"/>
+    <path android:strokeColor="#E8784B" android:strokeWidth="2.5" android:strokeLineCap="round" android:fillColor="#00000000"
+        android:pathData="M42,26 A17,17 0,0 1,66 26"/>
+    <path android:fillColor="#DCEBE8" android:pathData="M30,74 L78,74 L78,77 L30,77 Z"/>
+</vector>
